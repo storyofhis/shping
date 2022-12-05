@@ -19,7 +19,7 @@ type Users struct {
 	Email     string
 	Password  string
 	Role      Role `gorm:"type:role;default:'customer'"`
-	Balance   int
+	Balance   uint
 	CreatedAt time.Time
 	UpdatedAt time.Time
 }

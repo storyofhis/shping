@@ -19,6 +19,7 @@ func init() {
 		log.Println("cannot load your env")
 	}
 }
+
 func main() {
 	db, err := config.ConnectPostgresGORM()
 	if err != nil {
@@ -46,5 +47,4 @@ func main() {
 	app := httpserver.NewRouter(router, userHandler, categoryHandler, productHandler)
 	PORT := os.Getenv("PORT")
 	app.Start(":" + PORT)
-
 }

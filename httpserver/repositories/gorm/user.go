@@ -35,6 +35,7 @@ func (repo *userRepo) FindUserById(ctx context.Context, id uint) (*models.Users,
 	return user, repo.db.WithContext(ctx).Where("id = ?", id).Take(user).Error
 }
 
-func (repo *userRepo) UpdateUser(ctx context.Context, id uint) error {
-	return repo.db.WithContext(ctx).Delete(&models.Users{}, "id = ?", id).Error
+func (repo *userRepo) UpdateUser(ctx context.Context, user *models.Users) error {
+	user.UpdatedAt = time.Now()
+	return repo.db.WithContext(ctx).Model(user).Updates(*user).Error
 }

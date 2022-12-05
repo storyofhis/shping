@@ -62,8 +62,8 @@ func (control *UserController) Login(ctx *gin.Context) {
 	WriteJsonResponse(ctx, response)
 }
 
-func (control *UserController) UpdateUser(ctx *gin.Context) {
-	var req params.UpdateUser
+func (control *UserController) TopUp(ctx *gin.Context) {
+	var req params.TopUp
 	err := ctx.ShouldBindJSON(&req)
 	if err != nil {
 		ctx.AbortWithStatusJSON(http.StatusBadRequest, gin.H{
@@ -73,15 +73,15 @@ func (control *UserController) UpdateUser(ctx *gin.Context) {
 	}
 
 	claims, exist := ctx.Get("userData")
-
 	if !exist {
 		ctx.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{
-			"error": err.Error(),
+			"error": "unauthorized",
 		})
 		return
 	}
 
 	userData := claims.(*common.CustomClaims)
+
 	err = validator.New().Struct(req)
 	if err != nil {
 		ctx.AbortWithStatusJSON(http.StatusBadRequest, gin.H{
@@ -89,6 +89,7 @@ func (control *UserController) UpdateUser(ctx *gin.Context) {
 		})
 		return
 	}
-	response := control.svc.UpdateUser(ctx, uint(userData.Id), &req)
+
+	response := control.svc.TopUp(ctx, uint(userData.Id), &req)
 	WriteJsonResponse(ctx, response)
 }
