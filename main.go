@@ -23,7 +23,7 @@ func main() {
 	db, err := config.ConnectPostgresGORM()
 	if err != nil {
 		panic(err)
-		return
+
 	}
 	router := gin.Default()
 	config.GenerateJwtSignature()
