@@ -21,5 +21,8 @@ type CategorySvc interface {
 }
 
 type ProductSvc interface {
-	CreateProduct(ctx context.Context, product *params.CreateProduct, categoryId uint) *views.Response
+	CreateProduct(ctx context.Context, product *params.CreateProduct) *views.Response
+	GetProducts(ctx context.Context) *views.Response
+	UpdateProduct(ctx context.Context, product *params.UpdateProduct, productId uint) *views.Response
+	DeleteProduct(ctx context.Context, productId uint) *views.Response
 }
