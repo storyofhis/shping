@@ -2,7 +2,7 @@ package models
 
 import "time"
 
-type TransactionsHistory struct {
+type TransactionHistory struct {
 	Id         uint `gorm:"primaryKey;autoIncrement"`
 	ProductId  uint
 	Product    Products `gorm:"foreignKey:ProductId"`

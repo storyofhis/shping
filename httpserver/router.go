@@ -12,17 +12,19 @@ import (
 type router struct {
 	router *gin.Engine
 
-	user     *controllers.UserController
-	category *controllers.CategoryController
-	product  *controllers.ProductsController
+	user        *controllers.UserController
+	category    *controllers.CategoryController
+	product     *controllers.ProductsController
+	transaction *controllers.TransactionController
 }
 
-func NewRouter(r *gin.Engine, user *controllers.UserController, category *controllers.CategoryController, product *controllers.ProductsController) *router {
+func NewRouter(r *gin.Engine, user *controllers.UserController, category *controllers.CategoryController, product *controllers.ProductsController, transaction *controllers.TransactionController) *router {
 	return &router{
-		router:   r,
-		user:     user,
-		category: category,
-		product:  product,
+		router:      r,
+		user:        user,
+		category:    category,
+		product:     product,
+		transaction: transaction,
 	}
 }
 
@@ -37,6 +39,11 @@ func (r *router) Start(port string) {
 
 	// product
 	r.router.POST("/v1/products", r.verifyToken, r.product.CreateProduct)
+	r.router.GET("/v1/products", r.verifyToken, r.product.GetProducts)
+	r.router.PUT("/v1/products/:productId", r.verifyToken, r.product.UpdateProduct)
+	r.router.DELETE("/v1/products/:productId", r.verifyToken, r.product.DeleteProduct)
+
+	r.router.POST("/v1/transactions", r.verifyToken, r.transaction.CreateTransaction)
 	r.router.Run(port)
 }
 

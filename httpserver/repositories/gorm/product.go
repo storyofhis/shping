@@ -38,3 +38,12 @@ func (repo *productsRepo) GetProductById(ctx context.Context, id uint) (*models.
 	err := repo.db.WithContext(ctx).Where("id = ?", id).Take(products).Error
 	return products, err
 }
+
+func (repo *productsRepo) UpdateProduct(ctx context.Context, product *models.Products, id uint) error {
+	product.UpdatedAt = time.Now()
+	return repo.db.WithContext(ctx).Model(product).Where("id = ?", id).Updates(*product).Error
+}
+
+func (repo *productsRepo) DeleteProduct(ctx context.Context, id uint) error {
+	return repo.db.WithContext(ctx).Delete(&models.Products{}, "id = ?", id).Error
+}
