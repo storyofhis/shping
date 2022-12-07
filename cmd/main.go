@@ -44,7 +44,11 @@ func main() {
 	productSvc := services.NewProductSvc(productRepo, categoryRepo)
 	productHandler := controllers.NewProductController(productSvc)
 
-	app := httpserver.NewRouter(router, userHandler, categoryHandler, productHandler)
+	transactionRepo := gorm.NewTransactionsRepo(db)
+	transactionSvc := services.NewTransactionSvc(transactionRepo, productRepo, userRepo, categoryRepo)
+	transactionHandler := controllers.NewTransactionController(transactionSvc)
+
+	app := httpserver.NewRouter(router, userHandler, categoryHandler, productHandler, transactionHandler)
 	PORT := os.Getenv("PORT")
 	app.Start(":" + PORT)
 }
