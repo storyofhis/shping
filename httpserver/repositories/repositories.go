@@ -28,3 +28,7 @@ type ProductsRepo interface {
 	GetProductById(ctx context.Context, id uint) (*models.Products, error)
 	DeleteProduct(ctx context.Context, id uint) error
 }
+
+type TransactionsRepo interface {
+	CreateTransaction(ctx context.Context, transaction *models.TransactionHistory) error
+}

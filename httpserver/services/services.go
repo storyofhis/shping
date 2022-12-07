@@ -26,3 +26,7 @@ type ProductSvc interface {
 	UpdateProduct(ctx context.Context, product *params.UpdateProduct, productId uint) *views.Response
 	DeleteProduct(ctx context.Context, productId uint) *views.Response
 }
+
+type TransactionSvc interface {
+	CreateTransaction(ctx context.Context, transaction *params.CreateTransactions) *views.Response
+}
