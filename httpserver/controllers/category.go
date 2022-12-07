@@ -50,7 +50,7 @@ func (c *CategoryController) CreateCategory(ctx *gin.Context) {
 
 	err = validator.New().Struct(req)
 	if err != nil {
-		ctx.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{
+		ctx.AbortWithStatusJSON(http.StatusBadRequest, gin.H{
 			"error": err.Error(),
 		})
 		return

@@ -37,6 +37,9 @@ func (r *router) Start(port string) {
 
 	// product
 	r.router.POST("/v1/products", r.verifyToken, r.product.CreateProduct)
+	r.router.GET("/v1/products", r.verifyToken, r.product.GetProducts)
+	r.router.PUT("/v1/products/:productId", r.verifyToken, r.product.UpdateProduct)
+	r.router.DELETE("/v1/products/:productId", r.verifyToken, r.product.DeleteProduct)
 	r.router.Run(port)
 }
 

@@ -24,5 +24,7 @@ type CategoryRepo interface {
 type ProductsRepo interface {
 	CreateProduct(ctx context.Context, product *models.Products) error
 	GetAllProducts(ctx context.Context) ([]models.Products, error)
+	UpdateProduct(ctx context.Context, product *models.Products, id uint) error
 	GetProductById(ctx context.Context, id uint) (*models.Products, error)
+	DeleteProduct(ctx context.Context, id uint) error
 }

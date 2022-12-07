@@ -41,7 +41,7 @@ func main() {
 
 	// product
 	productRepo := gorm.NewProductsRepo(db)
-	productSvc := services.NewProductSvc(productRepo)
+	productSvc := services.NewProductSvc(productRepo, categoryRepo)
 	productHandler := controllers.NewProductController(productSvc)
 
 	app := httpserver.NewRouter(router, userHandler, categoryHandler, productHandler)
