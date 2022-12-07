@@ -30,6 +30,7 @@ func (r *router) Start(port string) {
 	// users
 	r.router.POST("/v1/users/register", r.user.Register)
 	r.router.POST("/v1/users/login", r.user.Login)
+	r.router.PATCH("/v1/users/topup", r.verifyToken, r.user.TopUp)
 
 	// category
 	r.router.POST("/v1/categories", r.verifyToken, r.category.CreateCategory)

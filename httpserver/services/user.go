@@ -3,6 +3,7 @@ package services
 import (
 	"context"
 	"errors"
+	"fmt"
 	"net/http"
 	"time"
 
@@ -68,15 +69,12 @@ func (svc *userSvc) Login(ctx context.Context, user *params.Login) *views.Respon
 	if err != nil {
 		if err == gorm.ErrRecordNotFound {
 			return views.ErrorResponse(http.StatusBadRequest, views.M_INVALID_CREDENTIALS, err)
-			// return nil
 		}
 		return views.ErrorResponse(http.StatusInternalServerError, views.M_INTERNAL_SERVER_ERROR, err)
-		// return nil
 	}
 	err = bcrypt.CompareHashAndPassword([]byte(model.Password), []byte(user.Password))
 	if err != nil {
 		return views.ErrorResponse(http.StatusBadRequest, views.M_INVALID_CREDENTIALS, err)
-		// return nil
 	}
 
 	role := string(model.Role)
@@ -97,6 +95,21 @@ func (svc *userSvc) Login(ctx context.Context, user *params.Login) *views.Respon
 	})
 }
 
-func (svc *userSvc) UpdateUser(ctx context.Context, id uint, user *params.UpdateUser) *views.Response {
-	return nil
+func (svc *userSvc) TopUp(ctx context.Context, id uint, params *params.TopUp) *views.Response {
+	model, err := svc.repo.FindUserById(ctx, id)
+	if err != nil {
+		if err == gorm.ErrRecordNotFound {
+			return views.ErrorResponse(http.StatusBadRequest, views.M_BAD_REQUEST, err)
+		}
+		return views.ErrorResponse(http.StatusInternalServerError, views.M_INTERNAL_SERVER_ERROR, err)
+	}
+
+	model.Balance += params.Balance
+
+	err = svc.repo.UpdateUser(ctx, model)
+	if err != nil {
+		return views.ErrorResponse(http.StatusInternalServerError, views.M_INTERNAL_SERVER_ERROR, err)
+	}
+
+	return views.SuccessResponse(http.StatusOK, fmt.Sprintf("Your balance has been successfully updated to Rp %d", model.Balance), nil)
 }
