@@ -45,6 +45,7 @@ func (r *router) Start(port string) {
 
 	r.router.POST("/v1/transactions", r.verifyToken, r.transaction.CreateTransaction)
 	r.router.GET("/v1/transactions/my-transactions", r.verifyToken, r.transaction.GetMyTransaction)
+	r.router.GET("/v1/transactions/user-transactions", r.verifyToken, r.transaction.GetUserTransaction)
 	r.router.Run(port)
 }
 

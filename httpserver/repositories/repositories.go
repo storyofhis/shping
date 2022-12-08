@@ -32,4 +32,5 @@ type ProductsRepo interface {
 type TransactionsRepo interface {
 	CreateTransaction(ctx context.Context, transaction *models.TransactionHistory) error
 	GetMyTransaction(ctx context.Context) ([]models.TransactionHistory, error)
+	GetUserTransaction(ctx context.Context) ([]models.TransactionHistory, error)
 }

@@ -30,4 +30,5 @@ type ProductSvc interface {
 type TransactionSvc interface {
 	CreateTransaction(ctx context.Context, transaction *params.CreateTransactions) *views.Response
 	GetMyTransaction(ctx context.Context) *views.Response
+	GetUserTransaction(ctx context.Context) *views.Response
 }

@@ -108,22 +108,21 @@ func (svc *transactionSvc) GetMyTransaction(ctx context.Context) *views.Response
 		return views.ErrorResponse(http.StatusInternalServerError, views.M_INTERNAL_SERVER_ERROR, err)
 	}
 
+	product := make([]views.ProductTransaction, 0)
+	for _, p := range products {
+		product = append(product, views.ProductTransaction{
+			Id:         p.Id,
+			Title:      p.Title,
+			Price:      p.Price,
+			Stock:      uint(p.Stock),
+			CategoryId: p.CategoryId,
+			CreatedAt:  p.CreatedAt,
+			UpdatedAt:  p.UpdatedAt,
+		})
+	}
+
 	temp := make([]views.GetMyTransaction, 0)
 	for _, t := range transaction {
-		// fmt.Println(t, transaction)
-		product := make([]views.ProductTransaction, 0)
-		for _, p := range products {
-			product = append(product, views.ProductTransaction{
-				Id:         p.Id,
-				Title:      p.Title,
-				Price:      p.Price,
-				Stock:      uint(p.Stock),
-				CategoryId: p.CategoryId,
-				CreatedAt:  p.CreatedAt,
-				UpdatedAt:  p.UpdatedAt,
-			})
-		}
-		// fmt.Print(t.Product)
 		temp = append(temp, views.GetMyTransaction{
 			Id:         t.Id,
 			ProductId:  t.ProductId,
@@ -131,11 +130,61 @@ func (svc *transactionSvc) GetMyTransaction(ctx context.Context) *views.Response
 			Quantity:   uint(t.Quantity),
 			TotalPrice: uint(t.TotalPrice),
 			Product:    product,
-			// Product: views.ProductTransaction{
-			// 	Id:    t.ProductId,
-			// 	Title: t.Product.Title,
-			// 	Price: t.Product.Price,
-			// },
+		})
+	}
+	return views.SuccessResponse(http.StatusOK, views.M_OK, temp)
+}
+
+func (svc *transactionSvc) GetUserTransaction(ctx context.Context) *views.Response {
+	products, err := svc.productRepo.GetAllProducts(ctx)
+	if err != nil {
+		if err == gorm.ErrRecordNotFound {
+			return views.ErrorResponse(http.StatusBadRequest, views.M_BAD_REQUEST, err)
+		}
+		return views.SuccessResponse(http.StatusInternalServerError, views.M_INTERNAL_SERVER_ERROR, err)
+	}
+
+	userData := ctx.Value("userData").(*common.CustomClaims)
+	users, err := svc.userRepo.FindUserById(ctx, uint(userData.Id))
+	if err != nil {
+		return views.ErrorResponse(http.StatusInternalServerError, views.M_INTERNAL_SERVER_ERROR, err)
+	}
+
+	transaction, err := svc.repo.GetUserTransaction(ctx)
+	if err != nil {
+		return views.ErrorResponse(http.StatusInternalServerError, views.M_INTERNAL_SERVER_ERROR, err)
+	}
+
+	product := make([]views.ProductTransaction, 0)
+	for _, p := range products {
+		product = append(product, views.ProductTransaction{
+			Id:         p.Id,
+			Title:      p.Title,
+			Price:      p.Price,
+			Stock:      uint(p.Stock),
+			CategoryId: p.CategoryId,
+			CreatedAt:  p.CreatedAt,
+			UpdatedAt:  p.UpdatedAt,
+		})
+	}
+
+	temp := make([]views.GetUserTransaction, 0)
+	for _, t := range transaction {
+		temp = append(temp, views.GetUserTransaction{
+			Id:         t.Id,
+			ProductId:  t.ProductId,
+			UserId:     t.UserId,
+			Quantity:   uint(t.Quantity),
+			TotalPrice: uint(t.TotalPrice),
+			Product:    product,
+			User: &views.UserTransaction{
+				Id:        users.Id,
+				Email:     users.Email,
+				FullName:  users.FullName,
+				Balance:   int(users.Balance),
+				CreatedAt: users.CreatedAt,
+				UpdatedAt: users.UpdatedAt,
+			},
 		})
 	}
 	return views.SuccessResponse(http.StatusOK, views.M_OK, temp)

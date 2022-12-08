@@ -28,3 +28,8 @@ func (repo *transactionsRepo) GetMyTransaction(ctx context.Context) ([]models.Tr
 	var transaction []models.TransactionHistory
 	return transaction, repo.db.WithContext(ctx).Find(&transaction).Error
 }
+
+func (repo *transactionsRepo) GetUserTransaction(ctx context.Context) ([]models.TransactionHistory, error) {
+	var transaction []models.TransactionHistory
+	return transaction, repo.db.WithContext(ctx).Find(&transaction).Error
+}

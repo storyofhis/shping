@@ -46,3 +46,8 @@ func (c *TransactionController) GetMyTransaction(ctx *gin.Context) {
 	response := c.svc.GetMyTransaction(ctx)
 	WriteJsonResponse(ctx, response)
 }
+
+func (c *TransactionController) GetUserTransaction(ctx *gin.Context) {
+	response := c.svc.GetUserTransaction(ctx)
+	WriteJsonResponse(ctx, response)
+}
