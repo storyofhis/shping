@@ -1,11 +1,12 @@
 package controllers
 
 import (
+	"net/http"
+
 	"github.com/gin-gonic/gin"
 	"github.com/go-playground/validator/v10"
 	"github.com/storyofhis/toko-belanja/httpserver/controllers/params"
 	"github.com/storyofhis/toko-belanja/httpserver/services"
-	"net/http"
 )
 
 type TransactionController struct {
@@ -38,5 +39,10 @@ func (c *TransactionController) CreateTransaction(ctx *gin.Context) {
 	}
 
 	response := c.svc.CreateTransaction(ctx, &req)
+	WriteJsonResponse(ctx, response)
+}
+
+func (c *TransactionController) GetMyTransaction(ctx *gin.Context) {
+	response := c.svc.GetMyTransaction(ctx)
 	WriteJsonResponse(ctx, response)
 }

@@ -44,6 +44,7 @@ func main() {
 	productSvc := services.NewProductSvc(productRepo, categoryRepo)
 	productHandler := controllers.NewProductController(productSvc)
 
+	// transaction
 	transactionRepo := gorm.NewTransactionsRepo(db)
 	transactionSvc := services.NewTransactionSvc(transactionRepo, productRepo, userRepo, categoryRepo)
 	transactionHandler := controllers.NewTransactionController(transactionSvc)

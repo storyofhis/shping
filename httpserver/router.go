@@ -44,6 +44,7 @@ func (r *router) Start(port string) {
 	r.router.DELETE("/v1/products/:productId", r.verifyToken, r.product.DeleteProduct)
 
 	r.router.POST("/v1/transactions", r.verifyToken, r.transaction.CreateTransaction)
+	r.router.GET("/v1/transactions/my-transactions", r.verifyToken, r.transaction.GetMyTransaction)
 	r.router.Run(port)
 }
 
