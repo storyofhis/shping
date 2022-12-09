@@ -25,7 +25,7 @@ func (repo *categoryRepo) CreateCategory(ctx context.Context, category *models.C
 	return repo.db.WithContext(ctx).Create(category).Error
 }
 
-func (repo *categoryRepo) GetCategory(ctx context.Context) ([]models.Categories, error) {
+func (repo *categoryRepo) GetCategories(ctx context.Context) ([]models.Categories, error) {
 	var categories []models.Categories
 
 	err := repo.db.WithContext(ctx).Find(&categories).Error
@@ -44,7 +44,7 @@ func (repo *categoryRepo) FindCategoryById(ctx context.Context, id uint) (*model
 
 func (repo *categoryRepo) UpdateCategory(ctx context.Context, category *models.Categories, id uint) error {
 	category.UpdatedAt = time.Now()
-	return repo.db.WithContext(ctx).Model(category).Where("id = ?", id).Updates(*category).Error
+	return repo.db.WithContext(ctx).Model(category).Where("id = ?", id).Updates(category).Error
 }
 
 func (repo *categoryRepo) DeleteCategory(ctx context.Context, id uint) error {
