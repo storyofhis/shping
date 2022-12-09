@@ -47,3 +47,12 @@ func (repo *productsRepo) UpdateProduct(ctx context.Context, product *models.Pro
 func (repo *productsRepo) DeleteProduct(ctx context.Context, id uint) error {
 	return repo.db.WithContext(ctx).Delete(&models.Products{}, "id = ?", id).Error
 }
+
+func (repo *productsRepo) FindProductsByCategoryId(ctx context.Context, id uint) ([]models.Products, error) {
+	var products []models.Products
+
+	if err := repo.db.WithContext(ctx).Where("category_id = ?", id).Find(&products).Error; err != nil {
+		return products, err
+	}
+	return products, nil
+}

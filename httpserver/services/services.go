@@ -15,9 +15,9 @@ type UserSvc interface {
 
 type CategorySvc interface {
 	CreateCategory(ctx context.Context, category *params.CreateCategory) *views.Response
-	// GetCategory(ctx context.Context) *views.Response
-	// UpdateCategory(ctx context.Context, category *params.UpdateCategory, id uint) *views.Response
-	// DeleteCategory(ctx context.Context, id uint) *views.CreateCategory
+	GetCategories(ctx context.Context) *views.Response
+	UpdateCategory(ctx context.Context, category *params.UpdateCategory, id uint) *views.Response
+	DeleteCategory(ctx context.Context, id uint) *views.Response
 }
 
 type ProductSvc interface {

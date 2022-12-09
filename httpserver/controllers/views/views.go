@@ -16,6 +16,7 @@ const (
 	M_EMAIL_ALREADY_USED           = "EMAIL_ALREADY_USED"
 	M_USERNAME_ALREADY_USED        = "USERNAME_ALREADY_USED"
 	M_PRODUCT_SUCCESSFULLY_DELETED = "Product has been successfully deleted"
+	M_CATEGORY_SUCCESSFULLY_DELETED = "Category has been successfully deleted"
 	M_STOCK_IS_NOT_ENOUGH          = "STOCK_IS_NOT_ENOUGH"
 	M_BALANCE_IS_NOT_ENOUGH        = "BALANCE_IS_NOT_ENOUGH"
 )
