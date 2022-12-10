@@ -15,7 +15,7 @@ type UserRepo interface {
 
 type CategoryRepo interface {
 	CreateCategory(ctx context.Context, category *models.Categories) error
-	GetCategory(ctx context.Context) ([]models.Categories, error)
+	GetCategories(ctx context.Context) ([]models.Categories, error)
 	FindCategoryById(ctx context.Context, id uint) (*models.Categories, error)
 	UpdateCategory(ctx context.Context, category *models.Categories, id uint) error
 	DeleteCategory(ctx context.Context, id uint) error
@@ -27,6 +27,7 @@ type ProductsRepo interface {
 	UpdateProduct(ctx context.Context, product *models.Products, id uint) error
 	GetProductById(ctx context.Context, id uint) (*models.Products, error)
 	DeleteProduct(ctx context.Context, id uint) error
+	FindProductsByCategoryId(ctx context.Context, id uint) ([]models.Products, error)
 }
 
 type TransactionsRepo interface {
