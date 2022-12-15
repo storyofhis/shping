@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"github.com/storyofhis/toko-belanja/common"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -48,6 +49,22 @@ func (c *TransactionController) GetMyTransaction(ctx *gin.Context) {
 }
 
 func (c *TransactionController) GetUserTransaction(ctx *gin.Context) {
+	claims, exists := ctx.Get("userData")
+	if !exists {
+		ctx.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{
+			"error": "token doesn't exists",
+		})
+		return
+	}
+	userData := claims.(*common.CustomClaims)
+	userRole := userData.Role
+	if userRole != "admin" {
+		ctx.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{
+			"error": "unauthorized user",
+		})
+		return
+	}
+
 	response := c.svc.GetUserTransaction(ctx)
 	WriteJsonResponse(ctx, response)
 }

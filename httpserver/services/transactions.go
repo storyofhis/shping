@@ -96,29 +96,11 @@ func (svc *transactionSvc) CreateTransaction(ctx context.Context, params *params
 }
 
 func (svc *transactionSvc) GetMyTransaction(ctx context.Context) *views.Response {
-	products, err := svc.productRepo.GetAllProducts(ctx)
-	if err != nil {
-		if err == gorm.ErrRecordNotFound {
-			return views.ErrorResponse(http.StatusBadRequest, views.M_BAD_REQUEST, err)
-		}
-		return views.SuccessResponse(http.StatusInternalServerError, views.M_INTERNAL_SERVER_ERROR, err)
-	}
-	transaction, err := svc.repo.GetMyTransaction(ctx)
+	userData := ctx.Value("userData").(*common.CustomClaims)
+
+	transaction, err := svc.repo.GetMyTransaction(ctx, uint(userData.Id))
 	if err != nil {
 		return views.ErrorResponse(http.StatusInternalServerError, views.M_INTERNAL_SERVER_ERROR, err)
-	}
-
-	product := make([]views.ProductTransaction, 0)
-	for _, p := range products {
-		product = append(product, views.ProductTransaction{
-			Id:         p.Id,
-			Title:      p.Title,
-			Price:      p.Price,
-			Stock:      uint(p.Stock),
-			CategoryId: p.CategoryId,
-			CreatedAt:  p.CreatedAt,
-			UpdatedAt:  p.UpdatedAt,
-		})
 	}
 
 	temp := make([]views.GetMyTransaction, 0)
@@ -129,43 +111,24 @@ func (svc *transactionSvc) GetMyTransaction(ctx context.Context) *views.Response
 			UserId:     t.UserId,
 			Quantity:   uint(t.Quantity),
 			TotalPrice: uint(t.TotalPrice),
-			Product:    product,
+			Product: views.ProductTransaction{
+				Id:         t.Product.Id,
+				Title:      t.Product.Title,
+				Price:      t.Product.Price,
+				Stock:      t.Product.Stock,
+				CategoryId: t.Product.CategoryId,
+				CreatedAt:  t.Product.CreatedAt,
+				UpdatedAt:  t.Product.UpdatedAt,
+			},
 		})
 	}
 	return views.SuccessResponse(http.StatusOK, views.M_OK, temp)
 }
 
 func (svc *transactionSvc) GetUserTransaction(ctx context.Context) *views.Response {
-	products, err := svc.productRepo.GetAllProducts(ctx)
-	if err != nil {
-		if err == gorm.ErrRecordNotFound {
-			return views.ErrorResponse(http.StatusBadRequest, views.M_BAD_REQUEST, err)
-		}
-		return views.SuccessResponse(http.StatusInternalServerError, views.M_INTERNAL_SERVER_ERROR, err)
-	}
-
-	userData := ctx.Value("userData").(*common.CustomClaims)
-	users, err := svc.userRepo.FindUserById(ctx, uint(userData.Id))
-	if err != nil {
-		return views.ErrorResponse(http.StatusInternalServerError, views.M_INTERNAL_SERVER_ERROR, err)
-	}
-
 	transaction, err := svc.repo.GetUserTransaction(ctx)
 	if err != nil {
 		return views.ErrorResponse(http.StatusInternalServerError, views.M_INTERNAL_SERVER_ERROR, err)
-	}
-
-	product := make([]views.ProductTransaction, 0)
-	for _, p := range products {
-		product = append(product, views.ProductTransaction{
-			Id:         p.Id,
-			Title:      p.Title,
-			Price:      p.Price,
-			Stock:      uint(p.Stock),
-			CategoryId: p.CategoryId,
-			CreatedAt:  p.CreatedAt,
-			UpdatedAt:  p.UpdatedAt,
-		})
 	}
 
 	temp := make([]views.GetUserTransaction, 0)
@@ -174,16 +137,24 @@ func (svc *transactionSvc) GetUserTransaction(ctx context.Context) *views.Respon
 			Id:         t.Id,
 			ProductId:  t.ProductId,
 			UserId:     t.UserId,
-			Quantity:   uint(t.Quantity),
-			TotalPrice: uint(t.TotalPrice),
-			Product:    product,
-			User: &views.UserTransaction{
-				Id:        users.Id,
-				Email:     users.Email,
-				FullName:  users.FullName,
-				Balance:   int(users.Balance),
-				CreatedAt: users.CreatedAt,
-				UpdatedAt: users.UpdatedAt,
+			Quantity:   t.Quantity,
+			TotalPrice: t.TotalPrice,
+			Product: views.ProductTransaction{
+				Id:         t.Product.Id,
+				Title:      t.Product.Title,
+				Price:      t.Product.Price,
+				Stock:      t.Product.Stock,
+				CategoryId: t.Product.CategoryId,
+				CreatedAt:  t.Product.CreatedAt,
+				UpdatedAt:  t.Product.UpdatedAt,
+			},
+			User: views.UserTransaction{
+				Id:        t.User.Id,
+				Email:     t.User.Email,
+				FullName:  t.User.FullName,
+				Balance:   t.User.Balance,
+				CreatedAt: t.User.CreatedAt,
+				UpdatedAt: t.User.UpdatedAt,
 			},
 		})
 	}

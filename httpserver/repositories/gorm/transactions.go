@@ -24,12 +24,12 @@ func (repo *transactionsRepo) CreateTransaction(ctx context.Context, transaction
 	return repo.db.WithContext(ctx).Create(transaction).Error
 }
 
-func (repo *transactionsRepo) GetMyTransaction(ctx context.Context) ([]models.TransactionHistory, error) {
+func (repo *transactionsRepo) GetMyTransaction(ctx context.Context, id uint) ([]models.TransactionHistory, error) {
 	var transaction []models.TransactionHistory
-	return transaction, repo.db.WithContext(ctx).Find(&transaction).Error
+	return transaction, repo.db.WithContext(ctx).Preload("Product").Where("user_id = ?", id).Find(&transaction).Error
 }
 
 func (repo *transactionsRepo) GetUserTransaction(ctx context.Context) ([]models.TransactionHistory, error) {
 	var transaction []models.TransactionHistory
-	return transaction, repo.db.WithContext(ctx).Find(&transaction).Error
+	return transaction, repo.db.WithContext(ctx).Preload("Product").Preload("User").Find(&transaction).Error
 }
