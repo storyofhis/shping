@@ -37,62 +37,98 @@ Routes for API
   - `POST` for register
   ```
   localhost:8080/v1/users/register
+  https://shping-production.up.railway.app/v1/users/register
   ```
   - `POST` for login
   ```
   localhost:8080/v1/users/login
+  https://shping-production.up.railway.app/v1/users/login
   ```
   - `PATCH` for edit topup user
   ```
   localhost:8080/v1/users/topup
+  https://shping-production.up.railway.app/v1/users/topup
   ```
   
 - `category` routes
   - `POST` for create category
   ```
   localhost:8080/v1/categories
+  https://shping-production.up.railway.app/v1/categories
   ```
   - `GET` for get all category
   ```
   localhost:8080/v1/categories
+  https://shping-production.up.railway.app/v1/categories
   ```
   - `PATCH` for edit category
   ```
   localhost:8080/v1/categories/:categoryId
+  https://shping-production.up.railway.app/v1/categories/:categoryId
   ```
   - `DELETE`for delete category
   ```
   localhost:8080/v1/categories/:categoryId
+  https://shping-production.up.railway.app/v1/categories/:categoryId
   ```
   
 - `product` routes
   - `POST` for create product
   ```
   localhost:8080/v1/products
+  https://shping-production.up.railway.app/v1/products
   ```
   - `GET` for get all products
   ```
   localhost:8080/v1/products
+  https://shping-production.up.railway.app/v1/products
   ```
   - `PUT` for edit product
   ```
   localhost:8080/v1/products/:productId
+  https://shping-production.up.railway.app/v1/products/:productId
   ```
   - `DELETE` for delete product
   ```
   localhost:8080/v1/products/:productId
+  https://shping-production.up.railway.app/v1/products/:productId
   ```
   
 - `transaction` routes
   - `POST` for create transaction
   ```
   localhost:8080/v1/transactions
+  https://shping-production.up.railway.app/v1/transactions
   ```
   - `GET` for get all transaction
   ```
   localhost:8080/v1/transactions/my-transactions
+  https://shping-production.up.railway.app/v1/transactions/my-transactions
   ```
   - `GET` for get all transaction with users response
   ```
   localhost:8080/v1/transactions/user-transactions
+  https://shping-production.up.railway.app/v1/transactions/user-transactions
+  ```
+
+Jobdesk Member
+- `MAULA IZZA AZIZI` (GLNG-KS04-020) :
+  ```
+  Initialize Project
+  User Endpoints: Register and Login
+  Transactions Endpoints: Get My Transactions and Get User Transactions
+  Deployment
+  ```
+- `HEZKYA NATANAEL RAMLI` (GLNG-KS04-008) :
+  ```
+  Endpoint User Topup
+  All Products Endpoint
+  Endpoint Create Transaction
+  Unit Test
+  Mocking
+  ```
+- `MUHAMAD RESTU FADILLAH` (GLNG-KS04-002) :
+  ```
+  All Categories EndPoint
+  Postman Collection
   ```

@@ -1,0 +1,519 @@
+{
+	"info": {
+		"_postman_id": "e0e3d592-a8ce-4351-8283-81a02fce71de",
+		"name": "toko-belanja",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23401211"
+	},
+	"item": [
+		{
+			"name": "REGISTER",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"full_name\": \"member2\",\r\n    \"email\": \"member2@email.com\",\r\n    \"password\": \"qwerty123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://shping-production.up.railway.app/v1/users/register",
+					"protocol": "https",
+					"host": [
+						"shping-production",
+						"up",
+						"railway",
+						"app"
+					],
+					"path": [
+						"v1",
+						"users",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "LOGIN",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"admin@email.com\",\r\n    \"password\": \"qwerty123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://shping-production.up.railway.app/v1/users/login",
+					"protocol": "https",
+					"host": [
+						"shping-production",
+						"up",
+						"railway",
+						"app"
+					],
+					"path": [
+						"v1",
+						"users",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TOPUP",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwicm9sZSI6ImN1c3RvbWVyIiwiZXhwIjoxNjcxMTczNjg3LCJzdWIiOiJtZW1iZXIxQGVtYWlsLmNvbSJ9.r0espl-6WrxwaDHrBctLTE5AMnTalgZ9jpKsmDbfRzM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://shping-production.up.railway.app/v1/users/topup",
+					"protocol": "https",
+					"host": [
+						"shping-production",
+						"up",
+						"railway",
+						"app"
+					],
+					"path": [
+						"v1",
+						"users",
+						"topup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CREATE-CATEGORIES",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6ImFkbWluIiwiZXhwIjoxNjcxMTczODE5LCJzdWIiOiJhZG1pbkBlbWFpbC5jb20ifQ.07Vok6KhqXzIooUXoatBGKIT_J3r7LzM20yGx6AkVQ4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"type\": \"makanan pokok\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://shping-production.up.railway.app/v1/categories",
+					"protocol": "https",
+					"host": [
+						"shping-production",
+						"up",
+						"railway",
+						"app"
+					],
+					"path": [
+						"v1",
+						"categories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET-CATEGORIES",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6ImFkbWluIiwiZXhwIjoxNjcxMTczODE5LCJzdWIiOiJhZG1pbkBlbWFpbC5jb20ifQ.07Vok6KhqXzIooUXoatBGKIT_J3r7LzM20yGx6AkVQ4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://shping-production.up.railway.app/v1/categories",
+					"protocol": "https",
+					"host": [
+						"shping-production",
+						"up",
+						"railway",
+						"app"
+					],
+					"path": [
+						"v1",
+						"categories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE-CATEGORY",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6ImFkbWluIiwiZXhwIjoxNjcxMTczODE5LCJzdWIiOiJhZG1pbkBlbWFpbC5jb20ifQ.07Vok6KhqXzIooUXoatBGKIT_J3r7LzM20yGx6AkVQ4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"type\": \"bahan baku-update\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://shping-production.up.railway.app/v1/categories/2",
+					"protocol": "https",
+					"host": [
+						"shping-production",
+						"up",
+						"railway",
+						"app"
+					],
+					"path": [
+						"v1",
+						"categories",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE-CATEGORY",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6ImFkbWluIiwiZXhwIjoxNjcxMTczODE5LCJzdWIiOiJhZG1pbkBlbWFpbC5jb20ifQ.07Vok6KhqXzIooUXoatBGKIT_J3r7LzM20yGx6AkVQ4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://shping-production.up.railway.app/v1/categories/3",
+					"protocol": "https",
+					"host": [
+						"shping-production",
+						"up",
+						"railway",
+						"app"
+					],
+					"path": [
+						"v1",
+						"categories",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CREATE-PRODUCT",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6ImFkbWluIiwiZXhwIjoxNjcxMTgxNTg5LCJzdWIiOiJhZG1pbkBlbWFpbC5jb20ifQ.bmjUo8IHLSVI5o6jWGacRmwuBTUTXNJpKZ_p6ssI6ro",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"telur bebek\",\r\n    \"price\": 4000,\r\n    \"stock\": 50,\r\n    \"category_id\": 2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://shping-production.up.railway.app/v1/products",
+					"protocol": "https",
+					"host": [
+						"shping-production",
+						"up",
+						"railway",
+						"app"
+					],
+					"path": [
+						"v1",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET-PRODUCTS",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwicm9sZSI6ImN1c3RvbWVyIiwiZXhwIjoxNjcxMTgxNTMwLCJzdWIiOiJtZW1iZXIxQGVtYWlsLmNvbSJ9.BhTV-X6vMcKP0plxh_Kj8KdTRjbXJQ9LSSRJnegEED8",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://shping-production.up.railway.app/v1/products",
+					"protocol": "https",
+					"host": [
+						"shping-production",
+						"up",
+						"railway",
+						"app"
+					],
+					"path": [
+						"v1",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE-PRODUCT",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6ImFkbWluIiwiZXhwIjoxNjcxMTczODE5LCJzdWIiOiJhZG1pbkBlbWFpbC5jb20ifQ.07Vok6KhqXzIooUXoatBGKIT_J3r7LzM20yGx6AkVQ4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"teh kotak-update\",\r\n    \"price\": 5000,\r\n    \"stock\": 50,\r\n    \"category_id\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://shping-production.up.railway.app/v1/products/1",
+					"protocol": "https",
+					"host": [
+						"shping-production",
+						"up",
+						"railway",
+						"app"
+					],
+					"path": [
+						"v1",
+						"products",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE-PRODUCT",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6ImFkbWluIiwiZXhwIjoxNjcxMTgxNTg5LCJzdWIiOiJhZG1pbkBlbWFpbC5jb20ifQ.bmjUo8IHLSVI5o6jWGacRmwuBTUTXNJpKZ_p6ssI6ro",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://shping-production.up.railway.app/v1/products/4",
+					"protocol": "https",
+					"host": [
+						"shping-production",
+						"up",
+						"railway",
+						"app"
+					],
+					"path": [
+						"v1",
+						"products",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CREATE-TRANSACTION",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwicm9sZSI6ImN1c3RvbWVyIiwiZXhwIjoxNjcxMTgxNTMwLCJzdWIiOiJtZW1iZXIxQGVtYWlsLmNvbSJ9.BhTV-X6vMcKP0plxh_Kj8KdTRjbXJQ9LSSRJnegEED8",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"product_id\": 3,\r\n    \"quantity\": 2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://shping-production.up.railway.app/v1/transactions",
+					"protocol": "https",
+					"host": [
+						"shping-production",
+						"up",
+						"railway",
+						"app"
+					],
+					"path": [
+						"v1",
+						"transactions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET-MYTRANSACTIONS",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwicm9sZSI6ImN1c3RvbWVyIiwiZXhwIjoxNjcxMTgxNTMwLCJzdWIiOiJtZW1iZXIxQGVtYWlsLmNvbSJ9.BhTV-X6vMcKP0plxh_Kj8KdTRjbXJQ9LSSRJnegEED8",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://shping-production.up.railway.app/v1/transactions/my-transactions",
+					"protocol": "https",
+					"host": [
+						"shping-production",
+						"up",
+						"railway",
+						"app"
+					],
+					"path": [
+						"v1",
+						"transactions",
+						"my-transactions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET-USERTRANSACTIONS",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6ImFkbWluIiwiZXhwIjoxNjcxMTgxNTg5LCJzdWIiOiJhZG1pbkBlbWFpbC5jb20ifQ.bmjUo8IHLSVI5o6jWGacRmwuBTUTXNJpKZ_p6ssI6ro",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://shping-production.up.railway.app/v1/transactions/user-transactions",
+					"protocol": "https",
+					"host": [
+						"shping-production",
+						"up",
+						"railway",
+						"app"
+					],
+					"path": [
+						"v1",
+						"transactions",
+						"user-transactions"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
