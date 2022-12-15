@@ -1,5 +1,7 @@
-# shping with Go (Golang) REST API
+# Shping with Go (Golang) REST API
 make a point api for e-commerce application
+
+you can [see](https://shping-production.up.railway.app/v1/)
 
 Used libraries:
 - [gin](https://github.com/gin-gonic)
@@ -30,6 +32,7 @@ go run cmd/main.go
 ```
 
 Routes for API
+> all of. local routes can change with this [link](https://shping-production.up.railway.app/v1/)
 - `user` routes
   - `POST` for register
   ```
